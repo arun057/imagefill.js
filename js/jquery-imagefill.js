@@ -46,12 +46,15 @@
 
     // wait for image to load, then fit it inside the container
     $container.imagesLoaded().done(function($img) {
-      imageAspect = $img.width() / $img.height();
-      $img.removeClass('loading');
-      fitImages();
-      if (!settings.runOnce) {
-        checkSizeChange();
-      }
+       $.each($img.elements, function() {
+     		  var that = $(this).find('img');
+     		  imageAspect = that.width() / that.height();
+ 			     that.removeClass('loading');
+ 			     fitImages();
+ 			     if (!settings.runOnce) {
+ 				      checkSizeChange();
+ 			     }
+     	});
     });
 
     function fitImages() {
